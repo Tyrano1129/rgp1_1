@@ -60,14 +60,21 @@ public class Shop {
 		while(true) {
 			System.out.println(name);
 			tempPrint(temp);
+			System.out.printf("가지고있는 금액 : %d%n",Player.getMoney());
 			String data = String.format("%s 선택 : (0 : 뒤로가기)",name);
-			int idx = FileData.getValue(data,1,temp.size())-1;
+			int idx = FileData.getValue(data,0,temp.size())-1;
 			if(idx == -1) {
 				System.out.println("뒤로가기....");
 				return;
 			}
+			if(Player.getMoney() - temp.get(idx).getPrice() < 0) {
+				System.out.println("돈이 부족합니다.");
+				return;
+			}
+			Player.setMoney(Player.getMoney() - temp.get(idx).getPrice());
 			Inven.inventoryOneAdd(temp.get(idx));
 		}
 	}
+	
 	
 }

@@ -13,32 +13,36 @@ public class Game {
 	}
 	
 	private void run() {
-		System.out.println("[메인메뉴]");
-		System.out.println("[1.길드관리]");
-		System.out.println("[2.상점]");
-		System.out.println("[3.인벤토리]");
-		System.out.println("[4.저장]");
-		System.out.println("[5.로드]");
-		System.out.println("[0.종료]");
-		
-		int sel = FileData.getValue("메뉴 선택 : ", 0, 5);
-		
-		if(sel == 1) {
-			System.out.println("[길드관리]");
-			guildMenu();
-		}else if(sel == 2) {
-			System.out.println("[상점]");
-			shopMenu();
-		}else if(sel == 3) {
-			System.out.println("[인벤토리]");
-			inventoryMenu();
-		}else if(sel == 4) {
-			System.out.println("[저장]");
-		}else if(sel == 5) {
-			System.out.println("[로드]");
-		}else if(sel == 0) {
-			System.out.println("종료....");
-			return;
+		while(true) {
+			System.out.println("[메인메뉴]");
+			System.out.println("[1.길드관리]");
+			System.out.println("[2.상점]");
+			System.out.println("[3.인벤토리]");
+			System.out.println("[4.저장]");
+			System.out.println("[5.로드]");
+			System.out.println("[0.종료]");
+
+			int sel = FileData.getValue("메뉴 선택 : ", 0, 5);
+
+			if (sel == 1) {
+				System.out.println("[길드관리]");
+				guildMenu();
+			} else if (sel == 2) {
+				System.out.println("[상점]");
+				shopMenu();
+			} else if (sel == 3) {
+				System.out.println("[인벤토리]");
+				inventoryMenu();
+			} else if (sel == 4) {
+				System.out.println("[저장]");
+				FileData.fileSave(guild, inventory);
+			} else if (sel == 5) {
+				System.out.println("[로드]");
+				FileData.fileLoad(guild, inventory);
+			} else if (sel == 0) {
+				System.out.println("종료....");
+				return;
+			}
 		}
 	}
 	// 길드 메뉴
@@ -104,9 +108,9 @@ public class Game {
 			int sel = FileData.getValue("메뉴 선택 : ",0,2);
 			
 			if(sel == 1) {
-				
+				inventory.guildOneWearing(guild);
 			}else if(sel == 2) {
-				
+				inventory.invenItemSale();
 			}else if(sel == 0) {
 				System.out.println("뒤로 가기....");
 				return;
